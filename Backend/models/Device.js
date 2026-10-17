@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('./Material');
 
-// Device er moddhe ekta material er hishab
+
 const compositionSchema = new mongoose.Schema(
   {
     material: {
@@ -9,14 +9,14 @@ const compositionSchema = new mongoose.Schema(
       ref: 'Material',
       required: true,
     },
-    // Device er total weight er koto % ei material
+    
     percentage: {
       type: Number,
       required: true,
       min: 0,
       max: 100,
     },
-    // Ei material er koto % recycle kore ber kora jay
+    
     recoveryRate: {
       type: Number,
       default: 80,
@@ -59,13 +59,13 @@ const deviceSchema = new mongoose.Schema(
         'other',
       ],
     },
-    // Ekta device er gora weight (kg)
+    
     weightKg: {
       type: Number,
       required: [true, 'Weight is required'],
       min: 0,
     },
-    // Onno naam ba shortcut, search er jonno (jemon "iphone 13")
+  
     aliases: {
       type: [String],
       default: [],
@@ -78,7 +78,7 @@ const deviceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Naam, brand, model diye search korar jonno
+
 deviceSchema.index({ name: 'text', brand: 'text', model: 'text', aliases: 'text' });
 
 module.exports = mongoose.model('Device', deviceSchema);
