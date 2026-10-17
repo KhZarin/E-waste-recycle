@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 require('./Material');
 
-
 const compositionSchema = new mongoose.Schema(
   {
     material: {
