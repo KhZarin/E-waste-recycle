@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const Material = require('./models/Material');
 const Device = require('./models/Device');
 
-
 const materials = [
   { name: 'Copper', symbol: 'Cu', category: 'base metal', pricePerKg: 9 },
   { name: 'Aluminum', symbol: 'Al', category: 'base metal', pricePerKg: 2.5 },
