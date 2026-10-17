@@ -7,7 +7,7 @@ const MAX_IMAGE_MB = 4;
 
 function Identify() {
   const [query, setQuery] = useState('');
-  const [image, setImage] = useState(null); // { base64, mimeType, preview }
+  const [image, setImage] = useState(null);
   const [dbResult, setDbResult] = useState(null);
   const [aiResult, setAiResult] = useState(null);
   const [error, setError] = useState('');
@@ -43,7 +43,7 @@ function Identify() {
     setLoading(true);
 
     try {
-      // Shudhu text hole age database e khuji
+      
       if (!image && query.trim()) {
         const { data } = await api.post('/devices/identify', { query });
         setDbResult(data);
@@ -53,7 +53,7 @@ function Identify() {
         }
       }
 
-      // Image thakle ba database e na pele AI diye recognize kori
+      
       const { data } = await api.post('/devices/ai-identify', {
         query,
         imageBase64: image?.base64,
