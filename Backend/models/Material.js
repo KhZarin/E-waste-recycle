@@ -17,7 +17,7 @@ const materialSchema = new mongoose.Schema(
       enum: ['precious metal', 'base metal', 'plastic', 'glass', 'other'],
       default: 'other',
     },
-    // Reference price: 1 kg material er dam (USD)
+    
     pricePerKg: {
       type: Number,
       required: [true, 'Price per kg is required'],
