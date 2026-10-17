@@ -19,7 +19,7 @@ function Analyze() {
       .then((res) => {
         setDevices(res.data);
 
-        // Identify page theke ashle device ar weight age theke bose jabe
+        
         const presetId = searchParams.get('deviceId');
         const presetWeight = searchParams.get('weight');
         if (presetId) {
