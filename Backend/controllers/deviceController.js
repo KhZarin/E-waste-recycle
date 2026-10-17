@@ -1,11 +1,11 @@
 const Device = require('../models/Device');
 
-// Text ke simple kore: lowercase, space/symbol bad
+
 const normalize = (text) => String(text).toLowerCase().replace(/[^a-z0-9]/g, '');
 
 const round = (number, digits = 4) => Number(number.toFixed(digits));
 
-// Query er sathe device ta koto mile, 0 theke 100 score
+
 const scoreDevice = (device, query) => {
   const candidates = [
     device.name,
@@ -32,8 +32,7 @@ const scoreDevice = (device, query) => {
   return best;
 };
 
-// @route   GET /api/devices
-// @access  Private
+
 const getDevices = async (req, res) => {
   try {
     const devices = await Device.find()
@@ -45,8 +44,7 @@ const getDevices = async (req, res) => {
   }
 };
 
-// @route   POST /api/devices/identify
-// @access  Private
+
 const identifyDevice = async (req, res) => {
   try {
     const { query } = req.body;
@@ -97,9 +95,7 @@ const identifyDevice = async (req, res) => {
   }
 };
 
-// @route   POST /api/devices/analyze
-// @access  Private
-// FR4: recoverable material, FR3: estimated recycling value
+
 const analyzeDevice = async (req, res) => {
   try {
     const { deviceId, weightKg, quantity } = req.body;
