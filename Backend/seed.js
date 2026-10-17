@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Material = require('./models/Material');
 const Device = require('./models/Device');
 
-// Sample reference data. Pore tomra real dam diye update korte parba
+
 const materials = [
   { name: 'Copper', symbol: 'Cu', category: 'base metal', pricePerKg: 9 },
   { name: 'Aluminum', symbol: 'Al', category: 'base metal', pricePerKg: 2.5 },
@@ -19,7 +19,7 @@ const materials = [
   { name: 'Glass', symbol: '', category: 'glass', pricePerKg: 0.2 },
 ];
 
-// Prottek material er koto % recover kora jay
+
 const recoveryRates = {
   Copper: 90,
   Aluminum: 85,
@@ -35,7 +35,7 @@ const recoveryRates = {
   Glass: 30,
 };
 
-// Device er composition: [material naam, device weight er koto %]
+
 const phoneComposition = [
   ['Copper', 15],
   ['Aluminum', 8],
@@ -169,13 +169,13 @@ const seedDB = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB Connected');
 
-    // Ager data muche notun kore dhokabe
+    
     await Material.deleteMany();
     await Device.deleteMany();
 
     const createdMaterials = await Material.insertMany(materials);
 
-    // Material naam theke id khujar jonno
+    
     const materialIds = {};
     createdMaterials.forEach((m) => {
       materialIds[m.name] = m._id;
