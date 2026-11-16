@@ -1,0 +1,80 @@
+
+const RecyclingPoint = require('../models/RecyclingPoint');
+
+const { DEVICE_CATEGORIES } = RecyclingPoint;
+
+// @route   GET /api/recycling-points/nearby?lat=..&lng=..&maxKm=..&type=..
+// @access  Private
+// FR5: user er location theke kache thaka recycling point, distance onujayi
+const getNearbyPoints = async (req, res) => {
+  try {
+    const lat = parseFloat(req.query.lat);
+    const lng = parseFloat(req.query.lng);
+    const maxKm = req.query.maxKm ? parseFloat(req.query.maxKm) : 25;
+    const { type } = req.query;
+
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      return res
+        .status(400)
+        .json({ message: 'Valid latitude and longitude are required' });
+    }
+
+    if (!Number.isFinite(maxKm) || maxKm <= 0 || maxKm > 200) {
+      return res
+        .status(400)
+        .json({ message: 'Distance must be between 1 and 200 km' });
+    }
+
+    if (type && !DEVICE_CATEGORIES.includes(type)) {
+      return res.status(400).json({ message: 'Invalid e-waste type' });
+    }
+
+    const geoNear = {
+      near: { type: 'Point', coordinates: [lng, lat] },
+      distanceField: 'distanceMeters',
+      maxDistance: maxKm * 1000,
+      spherical: true,
+    };
+
+    if (type) {
+      geoNear.query = { acceptedTypes: type };
+    }
+
+    // $geoNear nijei shobcheye kache thakata age rakhe sort kore
+    const points = await RecyclingPoint.aggregate([
+      { $geoNear: geoNear },
+      { $limit: 50 },
+    ]);
+
+    res.json({
+      count: points.length,
+      searchedFrom: { lat, lng },
+      maxKm,
+      points: points.map((point) => ({
+        _id: point._id,
+        name: point.name,
+        address: point.address,
+        area: point.area,
+        status: point.status,
+        openingHours: point.openingHours,
+        acceptedTypes: point.acceptedTypes,
+        coordinates: {
+          lng: point.location.coordinates[0],
+          lat: point.location.coordinates[1],
+        },
+        distanceKm: Number((point.distanceMeters / 1000).toFixed(2)),
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getNearbyPoints };
