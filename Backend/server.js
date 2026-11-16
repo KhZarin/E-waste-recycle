@@ -4,6 +4,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const deviceRoutes = require('./routes/deviceRoutes');
+const recyclingPointRoutes = require('./routes/recyclingPointRoutes');
+const creditRoutes = require('./routes/creditRoutes');
 
 const app = express();
 
@@ -11,7 +13,21 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL }));
+// Development e localhost er je kono port theke request allow
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        origin === process.env.CLIENT_URL ||
+        /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)
+      ) {
+        return callback(null, true);
+      }
+      callback(new Error('Not allowed by CORS'));
+    },
+  })
+);
 app.use(express.json({ limit: '10mb' }));
 
 // Test route
@@ -22,6 +38,8 @@ app.get('/', (req, res) => {
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/devices', deviceRoutes);
+app.use('/api/recycling-points', recyclingPointRoutes);
+app.use('/api/credits', creditRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
