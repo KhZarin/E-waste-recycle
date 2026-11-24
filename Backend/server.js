@@ -7,6 +7,8 @@ const deviceRoutes = require('./routes/deviceRoutes');
 const recyclingPointRoutes = require('./routes/recyclingPointRoutes');
 const creditRoutes = require('./routes/creditRoutes');
 const submissionRoutes = require('./routes/submissionRoutes');
+const achievementRoutes = require('./routes/achievementRoutes');
+const assistantRoutes = require('./routes/assistantRoutes');
 
 const app = express();
 
@@ -42,6 +44,8 @@ app.use('/api/devices', deviceRoutes);
 app.use('/api/recycling-points', recyclingPointRoutes);
 app.use('/api/credits', creditRoutes);
 app.use('/api/submissions', submissionRoutes);
+app.use('/api/achievements', achievementRoutes);
+app.use('/api/assistant', assistantRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

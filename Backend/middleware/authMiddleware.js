@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-
+// Login kora user ke chara kono route e dhukte debe na
 const protect = async (req, res, next) => {
   let token;
 
@@ -30,9 +30,11 @@ const protect = async (req, res, next) => {
   }
 };
 
-
+// Role check: authorize('admin'), authorize('partner', 'admin') ityadi
 const authorize = (...roles) => {
   return (req, res, next) => {
+    console.log("Logged in user role:", req.user.role);
+console.log("Allowed roles:", roles);
     if (!roles.includes(req.user.role)) {
       return res
         .status(403)
