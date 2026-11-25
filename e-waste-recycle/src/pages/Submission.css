@@ -1,0 +1,202 @@
+.sub-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.sub-container h2 {
+  color: #1b5e20;
+}
+
+.sub-hint {
+  color: #555;
+  font-size: 14px;
+}
+
+.sub-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.sub-field {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+  gap: 4px;
+}
+
+.sub-field.full {
+  grid-column: 1 / -1;
+}
+
+.sub-field input,
+.sub-field select,
+.sub-field textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.sub-field small {
+  font-weight: normal;
+  color: #666;
+}
+
+.sub-estimate {
+  grid-column: 1 / -1;
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.sub-button {
+  padding: 11px 22px;
+  background-color: #1b5e20;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.sub-button:hover {
+  background-color: #2e7d32;
+}
+
+.sub-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.sub-button.danger {
+  background-color: #c62828;
+}
+
+.sub-button.danger:hover {
+  background-color: #b71c1c;
+}
+
+.sub-button.small {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.sub-error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.sub-success {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.sub-empty {
+  background-color: #fff8e1;
+  border: 1px solid #ffe0b2;
+  color: #e65100;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.sub-card {
+  border: 1px solid #c8e6c9;
+  background-color: #f9fdf9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.sub-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sub-card h3 {
+  margin: 0 0 6px 0;
+  color: #1b5e20;
+  font-size: 17px;
+  text-transform: capitalize;
+}
+
+.sub-line {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.sub-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.sub-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sub-toolbar select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.sub-status {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.sub-status.pending {
+  background-color: #fff3cd;
+  color: #8a6d00;
+}
+
+.sub-status.confirmed {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.sub-status.rejected {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+.sub-status.cancelled {
+  background-color: #e0e0e0;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .sub-form {
+    grid-template-columns: 1fr;
+  }
+}
